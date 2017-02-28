@@ -1,5 +1,14 @@
 node_modules/
 debug.log
+npm-debug.log
 bundles/
-src/*.js
-src/*.js.map
+*.d.ts
+*.js
+*.js.map
+*.metadata.json
+*.ngsummary.json
+*.ngfactory.ts
+*.ngstyle.ts
+!inline-resources.js
+!publish.js
+!rollup-config.js

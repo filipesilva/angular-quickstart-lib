@@ -9,14 +9,16 @@
   "license": "MIT",
   "repository": {},
   "scripts": {
-    "build": "tsc -p src/",
-    "build:aot": "ngc -p src/",
-    "build:watch": "tsc -p src/ -w"
+    "build": "tsc",
+    "build:aot": "ngc",
+    "build:watch": "tsc -w"
   },
   "peerDependencies": {
     "@angular/core": ">=2.0.0 <5.0.0 || >=4.0.0-beta <5.0.0"
   },
   "devDependencies": {
+    "@angular/compiler": "^2.4.8",
+    "@angular/compiler-cli": "^2.4.8",
     "@angular/core": "^2.4.8",
     "@types/node": "^6.0.46",
     "glob": "^7.1.1",
