@@ -137,6 +137,6 @@ module.exports.inlineResourcesFromString = inlineResourcesFromString;
 
 // Run inlineResources if module is being called directly from the CLI with arguments.
 if (require.main === module && process.argv.length > 2) {
-  console.log('Inlining resources in: ', process.argv.slice(2));
+  console.log('Inlining resources in:', process.argv.slice(2).join());
   return inlineResources(process.argv.slice(2));
 }
