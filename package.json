@@ -15,7 +15,7 @@
     "pretest": "npm run clean",
     "test": "tsc -p tsconfig.spec.json && karma start karma.conf.js --single-run",
     "test:watch": "tsc -p tsconfig.spec.json && concurrently \"tsc -w -p tsconfig.spec.json\" \"karma start karma.conf.js\"",
-    "lint": "tslint ./src/**/*.ts -t verbose"
+    "lint": "tslint ./src/**/*.ts -e ./src/**/*.ngfactory.* -t verbose"
   },
   "peerDependencies": {
     "@angular/core": ">=2.0.0 <5.0.0 || >=4.0.0-beta <5.0.0"
