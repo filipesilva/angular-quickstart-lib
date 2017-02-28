@@ -1,0 +1,8 @@
+node_modules/
+*.ts
+!*.d.ts
+*.html
+*.css
+inline-resources.js
+rollup-config.js
+tsconfig.json
