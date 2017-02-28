@@ -1,0 +1,28 @@
+{
+  "name": "angular-quickstart-lib",
+  "version": "1.0.0",
+  "description": "Library QuickStart package.json from the documentation, supplemented with testing support",
+  "main": "bundles/hero-profile.umd.js",
+  "module": "src/index.js",
+  "typings": "src/index.d.ts",
+  "author": "",
+  "license": "MIT",
+  "repository": {},
+  "scripts": {
+    "build": "tsc -p src/",
+    "build:aot": "ngc -p src/",
+    "build:watch": "tsc -p src/ -w"
+  },
+  "peerDependencies": {
+    "@angular/core": ">=2.0.0 <5.0.0 || >=4.0.0-beta <5.0.0"
+  },
+  "devDependencies": {
+    "@angular/core": "^2.4.8",
+    "@types/node": "^6.0.46",
+    "glob": "^7.1.1",
+    "rollup": "^0.36.0",
+    "rxjs": "^5.0.1",
+    "typescript": "~2.0.10",
+    "zone.js": "^0.7.2"
+  }
+}
