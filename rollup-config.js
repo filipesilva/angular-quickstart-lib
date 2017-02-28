@@ -1,7 +1,6 @@
-// #docregion
 export default {
-  entry: './public/docs/_examples/cb-third-party-lib/hero-profile/index.js',
-  dest: './public/docs/_examples/cb-third-party-lib/hero-profile/bundles/hero-profile.umd.js',
+  entry: './src/index.js',
+  dest: './bundles/hero-profile.umd.js',
   format: 'umd',
   moduleName: 'ng.heroProfile',
   globals: {

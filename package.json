@@ -10,8 +10,8 @@
   "repository": {},
   "scripts": {
     "build": "tsc",
-    "build:aot": "ngc",
-    "build:watch": "tsc -w"
+    "build:watch": "tsc -w",
+    "build:aot": "ngc && node inline-resources.js \"src/*\" && rollup -c rollup-config.js"
   },
   "peerDependencies": {
     "@angular/core": ">=2.0.0 <5.0.0 || >=4.0.0-beta <5.0.0"

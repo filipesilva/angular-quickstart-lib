@@ -1,4 +1,3 @@
-// #docregion
 'use strict';
 
 const fs = require('fs');
@@ -11,7 +10,7 @@ const glob = require('glob');
  * faster. It also simplify the code.
  */
 function promiseify(fn) {
-  return function() {
+  return function () {
     const args = [].slice.call(arguments, 0);
     return new Promise((resolve, reject) => {
       fn.apply(this, args.concat([function (err, value) {
@@ -88,7 +87,7 @@ if (require.main === module) {
  * @return {string} The content with all templates inlined.
  */
 function inlineTemplate(content, urlResolver) {
-  return content.replace(/templateUrl:\s*'([^']+?\.html)'/g, function(m, templateUrl) {
+  return content.replace(/templateUrl:\s*'([^']+?\.html)'/g, function (m, templateUrl) {
     const templateFile = urlResolver(templateUrl);
     const templateContent = fs.readFileSync(templateFile, 'utf-8');
     const shortenedTemplate = templateContent
@@ -107,17 +106,17 @@ function inlineTemplate(content, urlResolver) {
  * @return {string} The content with all styles inlined.
  */
 function inlineStyle(content, urlResolver) {
-  return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, function(m, styleUrls) {
+  return content.replace(/styleUrls:\s*(\[[\s\S]*?\])/gm, function (m, styleUrls) {
     const urls = eval(styleUrls);
     return 'styles: ['
       + urls.map(styleUrl => {
-          const styleFile = urlResolver(styleUrl);
-          const styleContent = fs.readFileSync(styleFile, 'utf-8');
-          const shortenedStyle = styleContent
-            .replace(/([\n\r]\s*)+/gm, ' ')
-            .replace(/"/g, '\\"');
-          return `"${shortenedStyle}"`;
-        })
+        const styleFile = urlResolver(styleUrl);
+        const styleContent = fs.readFileSync(styleFile, 'utf-8');
+        const shortenedStyle = styleContent
+          .replace(/([\n\r]\s*)+/gm, ' ')
+          .replace(/"/g, '\\"');
+        return `"${shortenedStyle}"`;
+      })
         .join(',\n')
       + ']';
   });
@@ -135,3 +134,9 @@ function removeModuleId(content) {
 
 module.exports = inlineResources;
 module.exports.inlineResourcesFromString = inlineResourcesFromString;
+
+// Run inlineResources if module is being called directly from the CLI with arguments.
+if (require.main === module && process.argv.length > 2) {
+  console.log('Inlining resources in: ', process.argv.slice(2));
+  return inlineResources(process.argv.slice(2));
+}

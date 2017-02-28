@@ -1,23 +1,20 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "es2015",
       "dom"
-    ],
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true
+    ]
   },
-  "files": [
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules/*",
-    "**/*-aot.ts"
-  ]
+  "angularCompilerOptions": {
+    "skipMetadataEmit": false
+  }
 }
