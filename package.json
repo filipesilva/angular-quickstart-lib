@@ -27,7 +27,7 @@
     "@angular/core": "^2.4.8",
     "@angular/platform-browser": "^2.4.8",
     "@angular/platform-browser-dynamic": "^2.4.8",
-    "@types/jasmine": "^2.5.36",
+    "@types/jasmine": "2.5.36",
     "@types/node": "^6.0.46",
     "concurrently": "^3.3.0",
     "glob": "^7.1.1",
