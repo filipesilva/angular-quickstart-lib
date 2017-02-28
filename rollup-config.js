@@ -1,6 +1,6 @@
 export default {
   entry: './src/index.js',
-  dest: './bundles/hero-profile.umd.js',
+  dest: './bundles/quickstart-library.umd.js',
   format: 'umd',
   moduleName: 'ng.heroProfile',
   globals: {
