@@ -2,10 +2,10 @@ node_modules/
 debug.log
 npm-debug.log
 bundles/
-src/*.d.ts
-src/*.js
-src/*.js.map
-src/*.metadata.json
-src/*.ngsummary.json
-src/*.ngfactory.ts
-src/*.ngstyle.ts
+src/**/*.d.ts
+src/**/*.js
+src/**/*.js.map
+src/**/*.metadata.json
+src/**/*.ngsummary.json
+src/**/*.ngfactory.ts
+src/**/*.ngstyle.ts
