@@ -11,7 +11,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "ngc && node inline-resources.js \"src/*\" && rollup -c rollup-config.js",
-    "clean": "rimraf bundles/ src/*.d.ts src/*.js src/*.js.map src/*.metadata.json src/*.ngsummary.json src/*.ngfactory.ts src/*.ngstyle.ts",
+    "clean": "rimraf bundles src/**/*.d.ts src/**/*.js src/**/*.js.map src/**/*.metadata.json src/**/*.ngsummary.json src/**/*.ngfactory.ts src/**/*.ngstyle.ts",
     "pretest": "npm run clean",
     "test": "tsc -p tsconfig.spec.json && karma start karma.conf.js --single-run",
     "test:watch": "tsc -p tsconfig.spec.json && concurrently \"tsc -w -p tsconfig.spec.json\" \"karma start karma.conf.js\"",
