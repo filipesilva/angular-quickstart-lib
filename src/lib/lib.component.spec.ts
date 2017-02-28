@@ -4,7 +4,7 @@ import { DebugElement } from '@angular/core';
 
 import { LibComponent } from './lib.component';
 
-describe('AppComponent', function () {
+describe('LibComponent', function () {
   let de: DebugElement;
   let comp: LibComponent;
   let fixture: ComponentFixture<LibComponent>;
