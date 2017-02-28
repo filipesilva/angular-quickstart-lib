@@ -3,6 +3,12 @@ node_modules/
 !*.d.ts
 *.html
 *.css
+.editorconfig
+.travis.yml
 inline-resources.js
+karma-test-shim.js
+karma.conf.js
 rollup-config.js
 tsconfig.json
+tsconfig.spec.json
+tslint.json
