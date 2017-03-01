@@ -1,10 +1,8 @@
-node_modules/
 *.ts
 !*.d.ts
 *.ngsummary.json
 .editorconfig
 .travis.yml
-inline-resources.js
 karma-test-shim.js
 karma.conf.js
 rollup-config.js
