@@ -9,6 +9,7 @@
   "license": "MIT",
   "repository": {},
   "scripts": {
+    "prepublish": "npm run build",
     "prebuild": "npm run clean",
     "build": "ngc && rollup -c rollup-config.js",
     "clean": "rimraf bundles src/**/*.d.ts src/**/*.js src/**/*.js.map src/**/*.metadata.json src/**/*.ngsummary.json src/**/*.ngfactory.ts src/**/*.ngstyle.ts",
