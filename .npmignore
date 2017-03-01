@@ -1,6 +1,7 @@
 node_modules/
 *.ts
 !*.d.ts
+*.ngsummary.json
 .editorconfig
 .travis.yml
 inline-resources.js
