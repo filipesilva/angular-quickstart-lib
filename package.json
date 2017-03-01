@@ -10,7 +10,7 @@
   "repository": {},
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "ngc && node inline-resources.js \"src/**/*\" && rollup -c rollup-config.js",
+    "build": "ngc && rollup -c rollup-config.js",
     "clean": "rimraf bundles src/**/*.d.ts src/**/*.js src/**/*.js.map src/**/*.metadata.json src/**/*.ngsummary.json src/**/*.ngfactory.ts src/**/*.ngstyle.ts",
     "pretest": "npm run clean",
     "test": "tsc -p tsconfig.spec.json && karma start karma.conf.js --single-run",
@@ -40,6 +40,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.36.0",
+    "rollup-plugin-angular-inline": "^1.0.0",
     "rxjs": "^5.0.1",
     "systemjs": "^0.19.40",
     "tslint": "^4.4.2",
