@@ -31,7 +31,6 @@
     "@types/jasmine": "2.5.36",
     "@types/node": "^6.0.46",
     "concurrently": "^3.3.0",
-    "glob": "^7.1.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",
