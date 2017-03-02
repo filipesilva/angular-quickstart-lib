@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "dist-test/",
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",

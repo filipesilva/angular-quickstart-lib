@@ -1,7 +1,7 @@
 import angularInline from 'rollup-plugin-angular-inline';
 
 export default {
-  entry: './src/index.js',
+  entry: './dist/index.js',
   dest: './bundles/quickstart-lib.umd.js',
   format: 'umd',
   moduleName: 'quickstartLib',
@@ -9,6 +9,6 @@ export default {
     '@angular/core': 'ng.core'
   },
   plugins: [
-    angularInline({ include: './src/**/*.component.js' })
+    angularInline({ include: './dist/**/*.component.js' })
   ]
 }
