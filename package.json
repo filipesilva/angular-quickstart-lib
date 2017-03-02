@@ -11,8 +11,8 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "ngc && node copy-dist-files.js && rollup -c rollup-config.js",
-    "clean": "rimraf bundles dist dist-test",
-    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node copy-dist-files.js dist-test",
+    "clean": "rimraf bundles dist dist-spec src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
+    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node copy-dist-files.js dist-spec",
     "test": "karma start karma.conf.js --single-run",
     "pretest:watch": "npm run pretest",
     "test:watch": "concurrently \"tsc -w -p tsconfig.spec.json\" \"karma start karma.conf.js\"",

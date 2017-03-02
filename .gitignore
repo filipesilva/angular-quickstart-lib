@@ -1,6 +1,9 @@
 bundles/
 dist/
-dist-test/
+dist-spec/
 node_modules/
+src/**/*.ngfactory.ts
+src/**/*.ngsummary.json
+src/**/*.ngstyle.ts
 debug.log
 npm-debug.log

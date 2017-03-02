@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist-test/",
+    "outDir": "dist-spec/",
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
