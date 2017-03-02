@@ -2,7 +2,7 @@
   "name": "angular-quickstart-lib",
   "version": "1.0.0",
   "description": "Library QuickStart package.json from the documentation, supplemented with testing support",
-  "main": "bundles/hero-profile.umd.js",
+  "main": "bundles/quickstart-lib.umd.js",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "author": "",
