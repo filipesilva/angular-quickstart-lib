@@ -2,6 +2,7 @@ bundles/
 dist/
 dist-spec/
 node_modules/
+out-tsc/
 src/**/*.ngfactory.ts
 src/**/*.ngsummary.json
 src/**/*.ngstyle.ts

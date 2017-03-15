@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "dist/",
+    "outDir": "./out-tsc/",
+    "baseUrl": "./",
+    "rootDir": "./src/",
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
+    "inlineSources": true,
     "declaration": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
     "lib": [
       "es2015",
       "dom"
     ]
-  },
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ],
-  "angularCompilerOptions": {
-    "skipMetadataEmit": false
   }
 }

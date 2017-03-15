@@ -4,6 +4,7 @@
 # Only publish these files/folders:
 !bundles/
 !dist/
+!typings/
 !LICENSE
 !package.json
 !README.md

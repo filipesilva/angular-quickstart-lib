@@ -10,9 +10,10 @@
   "repository": {},
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "ngc && node copy-dist-files.js && rollup -c rollup-config.js",
-    "clean": "rimraf bundles dist dist-spec src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
-    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node copy-dist-files.js dist-spec",
+    "build": "ngc -p tsconfig.lib.json && node inline-resources.js tsconfig.lib.json",
+    "postbuild": "",
+    "clean": "rimraf bundles out-tsc dist src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
+    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node copy-dist-files.js out-tsc/spec/",
     "test": "karma start karma.conf.js --single-run",
     "pretest:watch": "npm run pretest",
     "test:watch": "concurrently \"tsc -w -p tsconfig.spec.json\" \"karma start karma.conf.js\"",
@@ -22,12 +23,12 @@
     "@angular/core": ">=2.0.0 <5.0.0 || >=4.0.0-beta <5.0.0"
   },
   "devDependencies": {
-    "@angular/common": "^2.4.8",
-    "@angular/compiler": "^2.4.8",
-    "@angular/compiler-cli": "^2.4.8",
-    "@angular/core": "^2.4.8",
-    "@angular/platform-browser": "^2.4.8",
-    "@angular/platform-browser-dynamic": "^2.4.8",
+    "@angular/common": "^4.0.0-rc.3",
+    "@angular/compiler": "^4.0.0-rc.3",
+    "@angular/compiler-cli": "^4.0.0-rc.3",
+    "@angular/core": "^4.0.0-rc.3",
+    "@angular/platform-browser": "^4.0.0-rc.3",
+    "@angular/platform-browser-dynamic": "^4.0.0-rc.3",
     "@types/jasmine": "2.5.36",
     "@types/node": "^6.0.46",
     "concurrently": "^3.3.0",
@@ -45,7 +46,7 @@
     "rxjs": "^5.0.1",
     "systemjs": "^0.19.40",
     "tslint": "^4.4.2",
-    "typescript": "~2.0.10",
+    "typescript": "2.2.1",
     "zone.js": "^0.7.2"
   }
 }

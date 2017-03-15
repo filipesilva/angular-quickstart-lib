@@ -7,8 +7,8 @@ Error.stackTraceLimit = 0; // "No stacktrace"" is usually best for lib testing.
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000;
 
 // builtPaths: root paths for output ("built") files
-// get from karma.config.js, then prefix with '/base/' (default is 'dist-spec/')
-var builtPaths = (__karma__.config.builtPaths || ['dist-spec/'])
+// get from karma.config.js, then prefix with '/base/' (default is 'out-tsc/spec/')
+var builtPaths = (__karma__.config.builtPaths || ['out-tsc/spec/'])
   .map(function (p) { return '/base/' + p; });
 
 __karma__.loaded = function () { };
@@ -39,7 +39,7 @@ System.config({
     'npm:': 'node_modules/'
   },
   // Base URL for System.js calls. 'base/' is where Karma serves files from.
-  baseURL: 'base/dist-spec/',
+  baseURL: 'base/out-tsc/spec/',
   // Extend usual application package list with test folder
   packages: {
     lib: { defaultExtension: 'js' },

@@ -1,6 +1,6 @@
 module.exports = function(config) {
 
-  var libBase    = 'dist-spec/';       // transpiled lib JS and map files
+  var libBase    = 'out-tsc/spec/';       // transpiled lib JS and map files
 
   // Testing helpers (optional) are conventionally in a folder called `testing`
   var testingBase    = 'testing/'; // transpiled test JS and map files
@@ -77,7 +77,7 @@ module.exports = function(config) {
     // Proxied base paths for loading assets
     proxies: {
       // required for modules fetched by SystemJS
-      '/base/dist-spec/node_modules/': '/base/node_modules/'
+      '/base/out-tsc/spec/node_modules/': '/base/node_modules/'
     },
 
     exclude: [],
