@@ -13,7 +13,7 @@
     "build": "ngc -p tsconfig.lib.json && node inline-resources.js tsconfig.lib.json",
     "postbuild": "",
     "clean": "rimraf bundles out-tsc dist src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
-    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node copy-dist-files.js out-tsc/spec/",
+    "pretest": "npm run clean && tsc -p tsconfig.spec.json && node inline-resources.js tsconfig.spec.json",
     "test": "karma start karma.conf.js --single-run",
     "pretest:watch": "npm run pretest",
     "test:watch": "concurrently \"tsc -w -p tsconfig.spec.json\" \"karma start karma.conf.js\"",
