@@ -11,7 +11,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "ngc -p tsconfig.lib.json && node inline-resources.js tsconfig.lib.json",
-    "postbuild": "",
+    "postbuild": "node bundle.js",
     "clean": "rimraf bundles out-tsc dist src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
     "pretest": "npm run clean && tsc -p tsconfig.spec.json && node inline-resources.js tsconfig.spec.json",
     "test": "karma start karma.conf.js --single-run",
@@ -42,7 +42,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.36.0",
-    "rollup-plugin-angular-inline": "^1.0.0",
+    "rollup-plugin-uglify": "^1.0.1",
     "rxjs": "^5.0.1",
     "systemjs": "^0.19.40",
     "tslint": "^4.4.2",
