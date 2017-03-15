@@ -8,6 +8,10 @@
   "author": "",
   "license": "MIT",
   "repository": {},
+  "engines": {
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
+  },
   "scripts": {
     "prebuild": "npm run clean",
     "build": "ngc -p tsconfig.lib.json && node inline-resources.js tsconfig.lib.json",
