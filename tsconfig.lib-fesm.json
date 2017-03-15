@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/lib-fesm/",
+    "target": "es2015"
+  },
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "index.js",
+    "flatModuleId": "angular-quickstart-lib"
+  }
+}
