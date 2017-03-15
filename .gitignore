@@ -3,6 +3,7 @@ dist/
 dist-spec/
 node_modules/
 out-tsc/
+typings/
 src/**/*.ngfactory.ts
 src/**/*.ngsummary.json
 src/**/*.ngstyle.ts
