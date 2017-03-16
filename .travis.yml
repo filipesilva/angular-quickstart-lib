@@ -18,3 +18,7 @@ script:
   - npm run lint
   - npm run build
   - npm test
+  - cd e2e-app/
+  - npm install
+  - npm run e2e
+  - npm run e2e:aot
