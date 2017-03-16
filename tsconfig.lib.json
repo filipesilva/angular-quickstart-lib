@@ -6,5 +6,8 @@
   },
   "files": [
     "./src/quickstart-lib.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "./out-tsc/gen-dir/"
+  }
 }

@@ -16,7 +16,7 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "node build.js",
-    "clean": "rimraf bundles out-tsc dist typings src/**/*.ngfactory.ts src/**/*.ngsummary.json src/**/*.ngstyle.ts",
+    "clean": "rimraf bundles out-tsc dist typings",
     "pretest": "npm run clean && tsc -p tsconfig.spec.json && node inline-resources.js tsconfig.spec.json",
     "test": "karma start karma.conf.js --single-run",
     "pretest:watch": "npm run pretest",
