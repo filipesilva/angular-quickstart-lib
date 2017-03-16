@@ -3,6 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
+const ts = require('typescript');
+
 
 /**
  * Simple Promiseify function that takes a Node API and return a version that supports promises.
@@ -28,47 +30,21 @@ const readFile = promiseify(fs.readFile);
 const writeFile = promiseify(fs.writeFile);
 
 /**
- * Read a tsconfig, resolving extends/rootDir/outDir properties.
- * @param tsconfigPath {string} The absolute tsconfig path.
- */
-function readTsconfig(tsconfigPath) {
-  const tsConfigDir = path.dirname(tsconfigPath);
-  let tsConfigJson = require(path.resolve(__dirname, tsconfigPath));
-  tsConfigJson['compilerOptions'] = tsConfigJson['compilerOptions'] || {};
-
-  // Recursively compose tsconfig content from extended files.
-  if (tsConfigJson['extends']) {
-    const parentPath = path.resolve(tsConfigDir, tsConfigJson.extends);
-    const parentTsconfigJson = readTsconfig(parentPath);
-    // We only need rootDir and outDir so there's no need for a deeper merge.
-    tsConfigJson.compilerOptions = Object.assign(
-      {},
-      parentTsconfigJson.compilerOptions,
-      tsConfigJson.compilerOptions
-    );
-
-  }
-
-  // Resolve paths relative to the tsconfig location.
-  ['outDir', 'rootDir'].forEach(prop => {
-    if (tsConfigJson.compilerOptions[prop]) {
-      tsConfigJson.compilerOptions[prop] = path.resolve(tsConfigDir,
-        tsConfigJson.compilerOptions[prop]);
-    }
-  })
-
-  return tsConfigJson;
-}
-
-/**
  * Inline resources in a tsc/ngc compilation.
  * @param tsconfigPath {string} Path to the tsconfig used in compilation.
  */
 function inlineResources(tsconfigPath) {
 
-  const tsconfigJson = readTsconfig(path.resolve(__dirname, tsconfigPath));
-  const rootDir = tsconfigJson.compilerOptions.rootDir;
-  const outDir = tsconfigJson.compilerOptions.outDir;
+  // Read tsconfig to get rootDir and outDir.
+  const absPath = path.resolve(__dirname, tsconfigPath);
+  const { config: json, error } = ts.readConfigFile(absPath, path => fs.readFileSync(path, 'utf-8'));
+  if (error) { throw error; }
+
+  const { options, errors } = ts.parseJsonConfigFileContent(json, ts.sys, __dirname);
+  if (errors.length > 0) { throw errors; }
+
+  const rootDir = options.rootDir;
+  const outDir = options.outDir;
 
   // Match only JavaScript files in outDir.
   const filesGlob = path.join(outDir, '**', '*.js');
