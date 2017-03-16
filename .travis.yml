@@ -18,6 +18,8 @@ script:
   - npm run lint
   - npm test
   - npm run build
+  - cat typings/index.d.ts
+  - cat typings/index.metadata.json
   - cd e2e-app/
   - npm install
   - npm run e2e
