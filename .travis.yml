@@ -16,8 +16,8 @@ install:
   - npm install
 script:
   - npm run lint
-  - npm run build
   - npm test
+  - npm run build
   - cd e2e-app/
   - npm install
   - npm run e2e
