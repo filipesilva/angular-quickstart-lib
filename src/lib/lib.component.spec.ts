@@ -19,15 +19,15 @@ describe('LibComponent', function () {
   beforeEach(() => {
     fixture = TestBed.createComponent(LibComponent);
     comp = fixture.componentInstance;
-    de = fixture.debugElement.query(By.css('h1'));
+    de = fixture.debugElement.query(By.css('h2'));
   });
 
   it('should create component', () => expect(comp).toBeDefined());
 
-  it('should have expected <h1> text', () => {
+  it('should have expected <h2> text', () => {
     fixture.detectChanges();
-    const h1 = de.nativeElement;
-    expect(h1.innerText).toMatch(/angular/i,
-      '<h1> should say something about "Angular"');
+    const h2 = de.nativeElement;
+    expect(h2.innerText).toMatch(/angular/i,
+      '<h2> should say something about "Angular"');
   });
 });
