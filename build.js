@@ -40,7 +40,7 @@ return Promise.resolve()
     const fesmDir = `./dist`;
     const libFilename = 'quickstart-lib';
     const rollupBaseConfig = {
-      entry: './out-tsc/lib/index.js',
+      entry: `./out-tsc/lib/${libFilename}.js`,
       moduleName: 'quickstartLib',
       globals: {
         '@angular/core': 'ng.core'

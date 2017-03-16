@@ -5,6 +5,6 @@
     "types": []
   },
   "files": [
-    "./src/index.ts"
+    "./src/quickstart-lib.ts"
   ]
 }

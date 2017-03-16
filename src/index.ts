@@ -1,3 +1,6 @@
-export { LibComponent } from './lib/lib.component';
-export { LibService } from './lib/lib.service';
-export { LibModule } from './lib/lib.module';
+// This file is not used to build this module. It is only used during editing
+// by the TypeScript language service and during build for verification. `ngc`
+// replaces this file with production index.ts when it rewrites private symbol
+// names.
+
+export * from './quickstart-lib';
