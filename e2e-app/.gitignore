@@ -6,4 +6,4 @@ src/**/*.js
 e2e/**/*.js
 e2e/**/*.js.map
 aot/*
-!aot/index.html
+dist/*
