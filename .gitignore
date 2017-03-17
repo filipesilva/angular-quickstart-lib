@@ -1,6 +1,5 @@
 bundles/
 dist/
-dist-spec/
 node_modules/
 out-tsc/
 typings/

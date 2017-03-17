@@ -7,6 +7,7 @@ const camelCase = require('camelcase');
 const ngc = require('@angular/compiler-cli/src/main').main;
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
+const sourcemaps = require('rollup-plugin-sourcemaps');
 
 const inlineResources = require('./inline-resources');
 
@@ -47,13 +48,16 @@ return Promise.resolve()
     const rollupBaseConfig = {
       entry: `./out-tsc/lib/${libName}.js`,
       moduleName: camelCase(libName),
+      sourceMap: true,
       globals: {
         '@angular/core': 'ng.core'
       },
       external: [
         '@angular/core'
       ],
-      plugins: []
+      plugins: [
+        sourcemaps()
+      ]
     };
 
     // UMD bundle.
