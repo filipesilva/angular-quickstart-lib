@@ -1,7 +1,5 @@
-bundles/
 dist/
 node_modules/
 out-tsc/
-typings/
 debug.log
 npm-debug.log

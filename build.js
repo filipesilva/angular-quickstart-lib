@@ -25,26 +25,25 @@ return Promise.resolve()
     .then(() => inlineResources('tsconfig.lib-fesm.json'))
     .then(() => console.log('ES2015 compilation succeeded.'))
   )
-  // Copy files to `typings` folder.
+  // Copy files to `dist/` folder.
   .then(() => {
     // Source and dist directories.
     const srcFolder = path.join(__dirname, 'src');
     const compilationFolder = path.join(__dirname, 'out-tsc/lib-fesm');
-    const typingsFolder = path.join(__dirname, 'typings');
+    const distDir = path.join(__dirname, 'dist');
 
     return Promise.resolve()
-      .then(() => _relativeCopy('**/*.d.ts', compilationFolder, typingsFolder))
-      .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, typingsFolder))
-      .then(() => _flatCopy('**/*.html', srcFolder, typingsFolder))
-      .then(() => _flatCopy('**/*.css', srcFolder, typingsFolder))
+      .then(() => _relativeCopy('**/*.d.ts', compilationFolder, distDir))
+      .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, distDir))
+      .then(() => _flatCopy('**/*.html', srcFolder, distDir))
+      .then(() => _flatCopy('**/*.css', srcFolder, distDir))
       .then(() => console.log('Typings move succeeded.'));
   })
   // Bundle lib.
   .then(() => {
     // Base configuration.
     const libName = require('./package.json').name;
-    const umdDir = `./bundles`;
-    const fesmDir = `./dist`;
+    const distDir = `./dist`;
     const rollupBaseConfig = {
       entry: `./out-tsc/lib/${libName}.js`,
       moduleName: camelCase(libName),
@@ -62,27 +61,27 @@ return Promise.resolve()
 
     // UMD bundle.
     const umdConfig = Object.assign({}, rollupBaseConfig, {
-      dest: `${umdDir}/${libName}.umd.js`,
+      dest: `${distDir}/${libName}.umd.js`,
       format: 'umd',
     });
 
     // Minified UMD bundle.
     const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
-      dest: `${umdDir}/${libName}.umd.min.js`,
+      dest: `${distDir}/${libName}.umd.min.js`,
       format: 'umd',
       plugins: rollupBaseConfig.plugins.concat([uglify({})])
     });
 
     // ESM+ES5 flat module bundle.
     const fesm5config = Object.assign({}, rollupBaseConfig, {
-      dest: `${fesmDir}/${libName}.es5.js`,
+      dest: `${distDir}/${libName}.es5.js`,
       format: 'es'
     });
 
     // ESM+ES2015 flat module bundle.
     const fesm2015config = Object.assign({}, rollupBaseConfig, {
       entry: './out-tsc/lib-fesm/index.js',
-      dest: `${fesmDir}/${libName}.js`,
+      dest: `${distDir}/${libName}.js`,
       format: 'es'
     });
 
