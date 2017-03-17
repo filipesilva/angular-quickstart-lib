@@ -7,7 +7,7 @@
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
-    "flatModuleOutFile": "index.js",
+    "flatModuleOutFile": "angular-quickstart-lib.js",
     "flatModuleId": "angular-quickstart-lib",
     "genDir": "./out-tsc/gen-dir/"
   }

@@ -3,6 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
+const camelCase = require('camelcase');
 const ngc = require('@angular/compiler-cli/src/main').main;
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
@@ -13,11 +14,13 @@ const inlineResources = require('./inline-resources');
 return Promise.resolve()
   // Compile to ES5.
   .then(() => ngc({ project: 'tsconfig.lib.json' })
+    .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
     .then(() => inlineResources('tsconfig.lib.json'))
     .then(() => console.log('ES5 compilation succeeded.'))
   )
   // Compile to ES2015.
   .then(() => ngc({ project: 'tsconfig.lib-fesm.json' })
+    .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
     .then(() => inlineResources('tsconfig.lib-fesm.json'))
     .then(() => console.log('ES2015 compilation succeeded.'))
   )
@@ -38,12 +41,12 @@ return Promise.resolve()
   // Bundle lib.
   .then(() => {
     // Base configuration.
+    const libName = require('./package.json').name;
     const umdDir = `./bundles`;
     const fesmDir = `./dist`;
-    const libFilename = 'quickstart-lib';
     const rollupBaseConfig = {
-      entry: `./out-tsc/lib/${libFilename}.js`,
-      moduleName: 'quickstartLib',
+      entry: `./out-tsc/lib/${libName}.js`,
+      moduleName: camelCase(libName),
       globals: {
         '@angular/core': 'ng.core'
       },
@@ -55,27 +58,27 @@ return Promise.resolve()
 
     // UMD bundle.
     const umdConfig = Object.assign({}, rollupBaseConfig, {
-      dest: `${umdDir}/${libFilename}.umd.js`,
+      dest: `${umdDir}/${libName}.umd.js`,
       format: 'umd',
     });
 
     // Minified UMD bundle.
     const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
-      dest: `${umdDir}/${libFilename}.umd.min.js`,
+      dest: `${umdDir}/${libName}.umd.min.js`,
       format: 'umd',
       plugins: rollupBaseConfig.plugins.concat([uglify({})])
     });
 
     // ESM+ES5 flat module bundle.
     const fesm5config = Object.assign({}, rollupBaseConfig, {
-      dest: `${fesmDir}/${libFilename}.es5.js`,
+      dest: `${fesmDir}/${libName}.es5.js`,
       format: 'es'
     });
 
     // ESM+ES2015 flat module bundle.
     const fesm2015config = Object.assign({}, rollupBaseConfig, {
       entry: './out-tsc/lib-fesm/index.js',
-      dest: `${fesmDir}/${libFilename}.js`,
+      dest: `${fesmDir}/${libName}.js`,
       format: 'es'
     });
 

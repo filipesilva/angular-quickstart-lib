@@ -5,9 +5,13 @@
     "types": []
   },
   "files": [
-    "./src/quickstart-lib.ts"
+    "./src/index.ts"
   ],
   "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "strictMetadataEmit": true,
+    "flatModuleOutFile": "angular-quickstart-lib.js",
+    "flatModuleId": "angular-quickstart-lib",
     "genDir": "./out-tsc/gen-dir/"
   }
 }
