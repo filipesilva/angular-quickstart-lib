@@ -53,6 +53,6 @@
     "systemjs": "^0.19.40",
     "tslint": "^4.4.2",
     "typescript": "2.2.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.8.4"
   }
 }
