@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LibService } from 'angular-quickstart-lib';
 
 @Component({
-  selector: 'demo-app',
+  selector: 'integration-app',
   template: `
     <my-lib></my-lib>
     <h3>Meaning is: {{meaning}}</h3>
