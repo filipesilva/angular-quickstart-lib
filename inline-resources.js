@@ -40,7 +40,7 @@ function inlineResources(tsconfigPath) {
   const { config: json, error } = ts.readConfigFile(absPath, path => fs.readFileSync(path, 'utf-8'));
   if (error) { throw error; }
 
-  const { options, errors } = ts.parseJsonConfigFileContent(json, ts.sys, __dirname);
+  const { options, errors } = ts.parseJsonConfigFileContent(json, ts.sys, path.dirname(absPath));
   if (errors.length > 0) { throw errors; }
 
   const rootDir = options.rootDir;

@@ -18,7 +18,7 @@
     "src/main-aot.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": "aot",
+    "genDir": "out-tsc",
     "skipMetadataEmit": true
   }
 }

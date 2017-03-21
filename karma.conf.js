@@ -1,10 +1,6 @@
-module.exports = function(config) {
+module.exports = function (config) {
 
-  var libBase    = 'out-tsc/spec/';       // transpiled lib JS and map files
-
-  // Testing helpers (optional) are conventionally in a folder called `testing`
-  var testingBase    = 'testing/'; // transpiled test JS and map files
-  var testingSrcBase = 'testing/'; // test source TS files
+  var libBase = 'src/lib/';       // transpiled app JS and map files
 
   config.set({
     basePath: '',
@@ -17,7 +13,7 @@ module.exports = function(config) {
     ],
 
     client: {
-      builtPaths: [libBase, testingBase], // add more spec base paths as needed
+      builtPaths: [libBase], // add more spec base paths as needed
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
 
@@ -57,21 +53,23 @@ module.exports = function(config) {
 
       'karma-test-shim.js', // optionally extend SystemJS mapping e.g., with barrels
 
-      // transpiled library & spec code paths loaded via module imports
+      // transpiled application & spec code paths loaded via module imports
       { pattern: libBase + '**/*.js', included: false, watched: true },
-      { pattern: testingBase + '**/*.js', included: false, watched: true },
+
+      // Asset (HTML & CSS) paths loaded via Angular's component compiler
+      // (these paths need to be rewritten, see proxies section)
+      { pattern: libBase + '**/*.html', included: false, watched: true },
+      { pattern: libBase + '**/*.css', included: false, watched: true },
 
       // Paths for debugging with source maps in dev tools
       { pattern: libBase + '**/*.ts', included: false, watched: false },
-      { pattern: libBase + '**/*.js.map', included: false, watched: false },
-      { pattern: testingSrcBase + '**/*.ts', included: false, watched: false },
-      { pattern: testingBase + '**/*.js.map', included: false, watched: false}
+      { pattern: libBase + '**/*.js.map', included: false, watched: false }
     ],
 
     // Proxied base paths for loading assets
     proxies: {
       // required for modules fetched by SystemJS
-      '/base/out-tsc/spec/node_modules/': '/base/node_modules/'
+      '/base/src/lib/node_modules/': '/base/node_modules/'
     },
 
     exclude: [],

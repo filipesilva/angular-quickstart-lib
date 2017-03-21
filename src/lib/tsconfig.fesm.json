@@ -1,14 +1,18 @@
 {
-  "extends": "./tsconfig.lib.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/lib-fesm/",
+    "outDir": "../../out-tsc/lib-fesm/",
     "target": "es2015"
   },
+  "files": [
+    "./index.ts",
+    "./typings.d.ts"
+  ],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "angular-quickstart-lib.js",
     "flatModuleId": "angular-quickstart-lib",
-    "genDir": "./out-tsc/gen-dir/"
+    "genDir": "../../out-tsc/lib-gen-dir/"
   }
 }

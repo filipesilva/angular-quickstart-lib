@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { LibService } from 'angular-quickstart-lib';
 
 @Component({
-  selector: 'my-app',
+  selector: 'demo-app',
   template: `
-    <h1>Hello {{name}}</h1>
     <my-lib></my-lib>
+    <h3>Meaning is: {{meaning}}</h3>
   `,
 })
 export class AppComponent {
-  name = 'Angular';
+  meaning: number;
   constructor(libService: LibService) {
-    console.log(libService.getMeaning());
+    this.meaning = libService.getMeaning();
   }
 }

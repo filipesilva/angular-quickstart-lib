@@ -5,6 +5,7 @@ const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
 const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
+const ngc = require('@angular/compiler-cli/src/main').main;
 
 
 const srcDir = path.join(__dirname, 'src/');
@@ -30,6 +31,8 @@ const rollupConfig = {
 };
 
 return Promise.resolve()
+  // Compile using ngc.
+  .then(() => ngc({ project: `./tsconfig.aot.json` }))
   // Create dist dir.
   .then(() => _recursiveMkDir(distDir))
   // Copy files.
@@ -40,6 +43,7 @@ return Promise.resolve()
 
     // Copy global stylesheets, images, etc.
     const assets = [
+      'favicon.ico',
       'styles.css'
     ];
 

@@ -16,12 +16,9 @@ install:
   - npm install
 script:
   - npm run lint
-  - npm test
-  - npm run build
-  # these two cat commands are for debug only while angular/angular#15192 is not fixed
+  - npm run test:once
+  - npm run integration
+  # these two cat commands are for debug only while angular/angular#15192 is not fixed and merged
   - cat dist/angular-quickstart-lib.d.ts
   - cat dist/angular-quickstart-lib.metadata.json
-  - cd e2e-app/
-  - npm install
-  - npm run e2e
-  - npm run e2e:aot
+

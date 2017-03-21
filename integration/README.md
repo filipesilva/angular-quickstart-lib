@@ -1,6 +1,6 @@
-# E2E App
+# Integration App
 
-This is a simplified version of https://github.com/angular/quickstart used to test the lib.
+This is a simplified version of https://github.com/angular/quickstart used to test the build lib.
 
 ## npm scripts
 

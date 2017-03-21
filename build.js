@@ -12,38 +12,40 @@ const sourcemaps = require('rollup-plugin-sourcemaps');
 const inlineResources = require('./inline-resources');
 
 
+const libName = require('./package.json').name;
+const libDir = `src/lib`;
+const distDir = `./dist`;
+
 return Promise.resolve()
   // Compile to ES5.
-  .then(() => ngc({ project: 'tsconfig.lib.json' })
+  .then(() => ngc({ project: `${libDir}/tsconfig.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources('tsconfig.lib.json'))
+    .then(() => inlineResources(`${libDir}/tsconfig.json`))
     .then(() => console.log('ES5 compilation succeeded.'))
   )
   // Compile to ES2015.
-  .then(() => ngc({ project: 'tsconfig.lib-fesm.json' })
+  .then(() => ngc({ project: `${libDir}/tsconfig.fesm.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources('tsconfig.lib-fesm.json'))
+    .then(() => inlineResources(`${libDir}/tsconfig.fesm.json`))
     .then(() => console.log('ES2015 compilation succeeded.'))
   )
-  // Copy files to `dist/` folder.
+  // Copy typings and templates to `dist/` folder.
   .then(() => {
     // Source and dist directories.
-    const srcFolder = path.join(__dirname, 'src');
+    const srcFolder = path.join(__dirname, libDir);
     const compilationFolder = path.join(__dirname, 'out-tsc/lib-fesm');
-    const distDir = path.join(__dirname, 'dist');
+    const distFolder = path.join(__dirname, distDir);
 
     return Promise.resolve()
-      .then(() => _relativeCopy('**/*.d.ts', compilationFolder, distDir))
-      .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, distDir))
-      .then(() => _flatCopy('**/*.html', srcFolder, distDir))
-      .then(() => _flatCopy('**/*.css', srcFolder, distDir))
-      .then(() => console.log('Typings move succeeded.'));
+      .then(() => _relativeCopy('**/*.d.ts', compilationFolder, distFolder))
+      .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, distFolder))
+      .then(() => _flatCopy('**/*.html', srcFolder, distFolder))
+      .then(() => _flatCopy('**/*.css', srcFolder, distFolder))
+      .then(() => console.log('Typings and templates copy succeeded.'));
   })
   // Bundle lib.
   .then(() => {
     // Base configuration.
-    const libName = require('./package.json').name;
-    const distDir = `./dist`;
     const rollupBaseConfig = {
       entry: `./out-tsc/lib/${libName}.js`,
       moduleName: camelCase(libName),
