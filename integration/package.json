@@ -1,7 +1,7 @@
 {
-  "name": "angular-quickstart",
+  "name": "integration-test",
   "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "description": "App for integration tests",
   "scripts": {
     "clean": "rimraf aot/ dist/ node_modules/angular-quickstart-lib/",
     "build": "tsc -p src/",
