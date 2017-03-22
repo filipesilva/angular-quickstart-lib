@@ -4,5 +4,4 @@
 // replaces this file with production index.ts when it rewrites private symbol
 // names.
 
-
 export * from './index';
