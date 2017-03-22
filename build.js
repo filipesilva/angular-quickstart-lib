@@ -24,16 +24,16 @@ return Promise.resolve()
     .then(() => console.log('ES5 compilation succeeded.'))
   )
   // Compile to ES2015.
-  .then(() => ngc({ project: `${libDir}/tsconfig.fesm.json` })
+  .then(() => ngc({ project: `${libDir}/tsconfig.es2015.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources(`${libDir}/tsconfig.fesm.json`))
+    .then(() => inlineResources(`${libDir}/tsconfig.es2015.json`))
     .then(() => console.log('ES2015 compilation succeeded.'))
   )
   // Copy typings and templates to `dist/` folder.
   .then(() => {
     // Source and dist directories.
     const srcFolder = path.join(__dirname, libDir);
-    const compilationFolder = path.join(__dirname, 'out-tsc/lib-fesm');
+    const compilationFolder = path.join(__dirname, 'out-tsc/lib-es2015');
     const distFolder = path.join(__dirname, distDir);
 
     return Promise.resolve()
@@ -82,7 +82,7 @@ return Promise.resolve()
 
     // ESM+ES2015 flat module bundle.
     const fesm2015config = Object.assign({}, rollupBaseConfig, {
-      entry: './out-tsc/lib-fesm/index.js',
+      entry: './out-tsc/lib-es2015/index.js',
       dest: `${distDir}/${libName}.js`,
       format: 'es'
     });
