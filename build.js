@@ -13,36 +13,32 @@ const inlineResources = require('./inline-resources');
 
 
 const libName = require('./package.json').name;
-const libDir = `src/lib`;
-const distDir = `./dist`;
+const rootFolder = path.join(__dirname);
+const srcFolder = path.join(rootFolder, './src/lib');
+const distFolder = path.join(rootFolder, './dist');
+const es2015compilationFolder = path.join(rootFolder, 'out-tsc/lib');
 
 return Promise.resolve()
   // Compile to ES2015.
-  .then(() => ngc({ project: `${libDir}/tsconfig.json` })
+  .then(() => ngc({ project: `${srcFolder}/tsconfig.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources(`${libDir}/tsconfig.json`))
+    .then(() => inlineResources(`${srcFolder}/tsconfig.json`))
     .then(() => console.log('ES2015 compilation succeeded.'))
   )
   // Compile to ES5.
-  .then(() => ngc({ project: `${libDir}/tsconfig.es5.json` })
+  .then(() => ngc({ project: `${srcFolder}/tsconfig.es5.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources(`${libDir}/tsconfig.es5.json`))
+    .then(() => inlineResources(`${srcFolder}/tsconfig.es5.json`))
     .then(() => console.log('ES5 compilation succeeded.'))
   )
-  // Copy typings and templates to `dist/` folder.
-  .then(() => {
-    // Source and dist directories.
-    const srcFolder = path.join(__dirname, libDir);
-    const compilationFolder = path.join(__dirname, 'out-tsc/lib');
-    const distFolder = path.join(__dirname, distDir);
-
-    return Promise.resolve()
-      .then(() => _relativeCopy('**/*.d.ts', compilationFolder, distFolder))
-      .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, distFolder))
-      .then(() => _relativeCopy('**/*.html', srcFolder, distFolder))
-      .then(() => _relativeCopy('**/*.css', srcFolder, distFolder))
-      .then(() => console.log('Typings and templates copy succeeded.'));
-  })
+  // Copy typings, metadata and templates to `dist/` folder.
+  .then(() => Promise.resolve()
+    .then(() => _relativeCopy('**/*.d.ts', es2015compilationFolder, distFolder))
+    .then(() => _relativeCopy('**/*.metadata.json', es2015compilationFolder, distFolder))
+    .then(() => _relativeCopy('**/*.html', srcFolder, distFolder))
+    .then(() => _relativeCopy('**/*.css', srcFolder, distFolder))
+    .then(() => console.log('Typings, metadata and templates copy succeeded.'))
+  )
   // Bundle lib.
   .then(() => {
     // Base configuration.
@@ -71,14 +67,14 @@ return Promise.resolve()
     // UMD bundle.
     const umdConfig = Object.assign({}, rollupBaseConfig, {
       entry: `./out-tsc/lib-es5/${libName}.js`,
-      dest: `${distDir}/bundles/${libName}.umd.js`,
+      dest: `${distFolder}/bundles/${libName}.umd.js`,
       format: 'umd',
     });
 
     // Minified UMD bundle.
     const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
       entry: `./out-tsc/lib-es5/${libName}.js`,
-      dest: `${distDir}/bundles/${libName}.umd.min.js`,
+      dest: `${distFolder}/bundles/${libName}.umd.min.js`,
       format: 'umd',
       plugins: rollupBaseConfig.plugins.concat([uglify({})])
     });
@@ -86,14 +82,14 @@ return Promise.resolve()
     // ESM+ES5 flat module bundle.
     const fesm5config = Object.assign({}, rollupBaseConfig, {
       entry: `./out-tsc/lib-es5/${libName}.js`,
-      dest: `${distDir}/${libName}.es5.js`,
+      dest: `${distFolder}/${libName}.es5.js`,
       format: 'es'
     });
 
     // ESM+ES2015 flat module bundle.
     const fesm2015config = Object.assign({}, rollupBaseConfig, {
       entry: './out-tsc/lib/index.js',
-      dest: `${distDir}/${libName}.js`,
+      dest: `${distFolder}/${libName}.js`,
       format: 'es'
     });
 
@@ -107,6 +103,13 @@ return Promise.resolve()
     return Promise.all(allBundles)
       .then(() => console.log('All bundles generated successfully.'))
   })
+  // Copy package files
+  .then(() => Promise.resolve()
+    .then(() => _relativeCopy('LICENSE', rootFolder, distFolder))
+    .then(() => _relativeCopy('package.json', rootFolder, distFolder))
+    .then(() => _relativeCopy('README.md', rootFolder, distFolder))
+    .then(() => console.log('Package files copy succeeded.'))
+  )
   .catch(e => {
     console.error('\Build failed. See below for errors.\n');
     console.error(e);
