@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../out-tsc/lib-es2015/",
-    "target": "es2015"
+    "target": "es5",
+    "outDir": "../../out-tsc/lib-es5/",
+    "baseUrl": "",
+    "types": []
   },
   "files": [
     "./index.ts",

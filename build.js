@@ -17,23 +17,23 @@ const libDir = `src/lib`;
 const distDir = `./dist`;
 
 return Promise.resolve()
-  // Compile to ES5.
+  // Compile to ES2015.
   .then(() => ngc({ project: `${libDir}/tsconfig.json` })
     .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
     .then(() => inlineResources(`${libDir}/tsconfig.json`))
-    .then(() => console.log('ES5 compilation succeeded.'))
-  )
-  // Compile to ES2015.
-  .then(() => ngc({ project: `${libDir}/tsconfig.es2015.json` })
-    .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
-    .then(() => inlineResources(`${libDir}/tsconfig.es2015.json`))
     .then(() => console.log('ES2015 compilation succeeded.'))
+  )
+  // Compile to ES5.
+  .then(() => ngc({ project: `${libDir}/tsconfig.es5.json` })
+    .then(exitCode => exitCode === 0 ? Promise.resolve() : Promise.reject())
+    .then(() => inlineResources(`${libDir}/tsconfig.es5.json`))
+    .then(() => console.log('ES5 compilation succeeded.'))
   )
   // Copy typings and templates to `dist/` folder.
   .then(() => {
     // Source and dist directories.
     const srcFolder = path.join(__dirname, libDir);
-    const compilationFolder = path.join(__dirname, 'out-tsc/lib-es2015');
+    const compilationFolder = path.join(__dirname, 'out-tsc/lib');
     const distFolder = path.join(__dirname, distDir);
 
     return Promise.resolve()
@@ -47,7 +47,6 @@ return Promise.resolve()
   .then(() => {
     // Base configuration.
     const rollupBaseConfig = {
-      entry: `./out-tsc/lib/${libName}.js`,
       moduleName: camelCase(libName),
       sourceMap: true,
       // ATTENTION:
@@ -71,12 +70,14 @@ return Promise.resolve()
 
     // UMD bundle.
     const umdConfig = Object.assign({}, rollupBaseConfig, {
+      entry: `./out-tsc/lib-es5/${libName}.js`,
       dest: `${distDir}/${libName}.umd.js`,
       format: 'umd',
     });
 
     // Minified UMD bundle.
     const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
+      entry: `./out-tsc/lib-es5/${libName}.js`,
       dest: `${distDir}/${libName}.umd.min.js`,
       format: 'umd',
       plugins: rollupBaseConfig.plugins.concat([uglify({})])
@@ -84,13 +85,14 @@ return Promise.resolve()
 
     // ESM+ES5 flat module bundle.
     const fesm5config = Object.assign({}, rollupBaseConfig, {
+      entry: `./out-tsc/lib-es5/${libName}.js`,
       dest: `${distDir}/${libName}.es5.js`,
       format: 'es'
     });
 
     // ESM+ES2015 flat module bundle.
     const fesm2015config = Object.assign({}, rollupBaseConfig, {
-      entry: './out-tsc/lib-es2015/index.js',
+      entry: './out-tsc/lib/index.js',
       dest: `${distDir}/${libName}.js`,
       format: 'es'
     });
