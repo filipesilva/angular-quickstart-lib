@@ -71,14 +71,14 @@ return Promise.resolve()
     // UMD bundle.
     const umdConfig = Object.assign({}, rollupBaseConfig, {
       entry: `./out-tsc/lib-es5/${libName}.js`,
-      dest: `${distDir}/${libName}.umd.js`,
+      dest: `${distDir}/bundles/${libName}.umd.js`,
       format: 'umd',
     });
 
     // Minified UMD bundle.
     const minifiedUmdConfig = Object.assign({}, rollupBaseConfig, {
       entry: `./out-tsc/lib-es5/${libName}.js`,
-      dest: `${distDir}/${libName}.umd.min.js`,
+      dest: `${distDir}/bundles/${libName}.umd.min.js`,
       format: 'umd',
       plugins: rollupBaseConfig.plugins.concat([uglify({})])
     });
