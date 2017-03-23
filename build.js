@@ -39,8 +39,8 @@ return Promise.resolve()
     return Promise.resolve()
       .then(() => _relativeCopy('**/*.d.ts', compilationFolder, distFolder))
       .then(() => _relativeCopy('**/*.metadata.json', compilationFolder, distFolder))
-      .then(() => _flatCopy('**/*.html', srcFolder, distFolder))
-      .then(() => _flatCopy('**/*.css', srcFolder, distFolder))
+      .then(() => _relativeCopy('**/*.html', srcFolder, distFolder))
+      .then(() => _relativeCopy('**/*.css', srcFolder, distFolder))
       .then(() => console.log('Typings and templates copy succeeded.'));
   })
   // Bundle lib.
@@ -119,19 +119,6 @@ function _relativeCopy(fileGlob, from, to) {
     files.forEach(file => {
       const origin = path.join(from, file);
       const dest = path.join(to, file);
-      _recursiveMkDir(path.dirname(dest));
-      fs.createReadStream(origin).pipe(fs.createWriteStream(dest));
-    })
-  })
-}
-
-// Copy files flattering relative paths.
-function _flatCopy(fileGlob, from, to) {
-  return glob(fileGlob, { cwd: from, nodir: true }, (err, files) => {
-    if (err) throw err;
-    files.forEach(file => {
-      const origin = path.join(from, file);
-      const dest = path.join(to, path.basename(file));
       _recursiveMkDir(path.dirname(dest));
       fs.createReadStream(origin).pipe(fs.createWriteStream(dest));
     })
