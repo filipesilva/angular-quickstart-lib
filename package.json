@@ -29,7 +29,7 @@
     "pretest:once": "npm run build-test",
     "test:once": "karma start karma.conf.js --single-run",
     "preintegration": "npm run build && cd integration && npm run clean && npm install",
-    "integration": "npm run integration:jit && npm run integration:aot",
+    "integration": "npm run integration:aot && npm run integration:jit",
     "integration:jit": "cd integration && npm run e2e",
     "integration:aot": "cd integration && npm run e2e:aot",
     "lint": "tslint ./src/**/*.ts -t verbose"
