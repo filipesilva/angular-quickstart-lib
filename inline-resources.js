@@ -3,13 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
-const ts = require('typescript');
 
 
 /**
  * Simple Promiseify function that takes a Node API and return a version that supports promises.
  * We use promises instead of synchronized functions to make the process less I/O bound and
- * faster. It also simplify the code.
+ * faster. It also simplifies the code.
  */
 function promiseify(fn) {
   return function () {
@@ -31,34 +30,22 @@ const writeFile = promiseify(fs.writeFile);
 
 /**
  * Inline resources in a tsc/ngc compilation.
- * @param tsconfigPath {string} Path to the tsconfig used in compilation.
+ * @param projectPath {string} Path to the project.
  */
-function inlineResources(tsconfigPath) {
+function inlineResources(projectPath) {
 
-  // Read tsconfig to get rootDir and outDir.
-  const absPath = path.resolve(__dirname, tsconfigPath);
-  const { config: json, error } = ts.readConfigFile(absPath, path => fs.readFileSync(path, 'utf-8'));
-  if (error) { throw error; }
-
-  const { options, errors } = ts.parseJsonConfigFileContent(json, ts.sys, path.dirname(absPath));
-  if (errors.length > 0) { throw errors; }
-
-  const rootDir = options.rootDir;
-  const outDir = options.outDir;
-
-  // Match only JavaScript files in outDir.
-  const filesGlob = path.join(outDir, '**', '*.js');
-  const files = glob.sync(filesGlob, {});
+  // Match only TypeScript files in projectPath.
+  const files = glob.sync('**/*.ts', {cwd: projectPath});
 
   // For each file, inline the templates and styles under it and write the new file.
   return Promise.all(files.map(filePath => {
-    return readFile(filePath, 'utf-8')
+    const fullFilePath = path.join(projectPath, filePath);
+    return readFile(fullFilePath, 'utf-8')
       .then(content => inlineResourcesFromString(content, url => {
-        // Resolve the template url from rootDir.
-        const relativePath = path.relative(outDir, path.dirname(filePath));
-        return path.join(rootDir, relativePath, url);
+        // Resolve the template url.
+        return path.join(path.dirname(fullFilePath), url);
       }))
-      .then(content => writeFile(filePath, content))
+      .then(content => writeFile(fullFilePath, content))
       .catch(err => {
         console.error('An error occured: ', err);
       });
