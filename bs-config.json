@@ -3,7 +3,7 @@
     "baseDir": "src/demo",
     "routes": {
       "/node_modules": "node_modules",
-      "/angular-quickstart-lib": "src/lib"
+      "/quickstart-lib": "src/lib"
     }
   }
 }

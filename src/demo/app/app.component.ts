@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LibService } from 'angular-quickstart-lib';
+import { LibService } from 'quickstart-lib';
 
 @Component({
   selector: 'demo-app',

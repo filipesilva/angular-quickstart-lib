@@ -34,7 +34,7 @@
       rxjs: {
         defaultExtension: 'js'
       },
-      'angular-quickstart-lib': {
+      'quickstart-lib': {
         main: 'index.js',
         defaultExtension: 'js'
       }
