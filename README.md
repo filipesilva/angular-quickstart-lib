@@ -7,10 +7,13 @@ It may not be fully compatible with current versions of Angular.
 # Angular QuickStart Lib
 [![Build Status][travis-badge]][travis-badge-url]
 
-This is a simple library quickstart for Angular libraries.
+This is a simple library quickstart for Angular libraries, implementing the
+[Angular Package Format v4.0](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/edit#heading=h.k0mh3o8u5hx).
+
+Currently only unscoped, primary entry-point libraries are supported.
 
 Features:
-- a simple a library
+- a simple example library
 - unit tests for the library
 - a demo application that consumes the library in JIT mode and runs in watch mode
 - an integration app that consumes the library in JIT and AOT mode and runs e2e tests
