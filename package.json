@@ -2,7 +2,7 @@
   "name": "quickstart-lib",
   "version": "1.0.0",
   "description": "Library QuickStart package.json from the documentation, supplemented with testing support",
-  "main": "./quickstart-lib.umd.js",
+  "main": "./bundles/quickstart-lib.umd.js",
   "module": "./quickstart-lib.es5.js",
   "es2015": "./quickstart-lib.js",
   "typings": "./quickstart-lib.d.ts",
