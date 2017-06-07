@@ -51,6 +51,8 @@ module.exports = function (config) {
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
+      { pattern: 'src/demo/systemjs-angular-loader.js', included: false, watched: false },
+
       'karma-test-shim.js', // optionally extend SystemJS mapping e.g., with barrels
 
       // transpiled application & spec code paths loaded via module imports
@@ -69,7 +71,8 @@ module.exports = function (config) {
     // Proxied base paths for loading assets
     proxies: {
       // required for modules fetched by SystemJS
-      '/base/src/lib/node_modules/': '/base/node_modules/'
+      '/base/src/lib/node_modules/': '/base/node_modules/',
+      '/base/src/lib/demo/': '/base/src/demo/'
     },
 
     exclude: [],

@@ -3,10 +3,7 @@ import { LibService } from 'quickstart-lib';
 
 @Component({
   selector: 'integration-app',
-  template: `
-    <my-lib></my-lib>
-    <h3>Meaning is: {{meaning}}</h3>
-  `,
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   meaning: number;

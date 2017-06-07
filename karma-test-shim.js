@@ -43,10 +43,19 @@ System.config({
   // Extend usual application package list with test folder
   packages: {
     rxjs: { defaultExtension: 'js' },
-    '': { defaultExtension: 'js' }
+    '': { defaultExtension: 'js' },
+    src: {
+        defaultExtension: 'js',
+        meta: {
+          './*.js': {
+            loader: 'system-loader'
+          }
+        }
+      }
   },
   // Map the angular umd bundles
   map: {
+    'system-loader': 'demo/systemjs-angular-loader.js',
     '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
     '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
     '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
@@ -65,6 +74,7 @@ System.config({
     '@angular/router/testing': 'npm:@angular/router/bundles/router-testing.umd.js',
     '@angular/forms/testing': 'npm:@angular/forms/bundles/forms-testing.umd.js',
     'rxjs': 'npm:rxjs',
+    'src': 'src'
   }
 });
 

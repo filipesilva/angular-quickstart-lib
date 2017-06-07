@@ -6,7 +6,7 @@ npm-debug.log
 src/**/*.js
 !src/demo/systemjs.config.js
 !src/demo/systemjs.config.lib.js
-!src/demo/systemjs-angular-loader.js
+!**/*systemjs-angular-loader.js
 *.js.map
 e2e/**/*.js
 e2e/**/*.js.map

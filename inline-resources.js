@@ -62,8 +62,7 @@ function inlineResourcesFromString(content, urlResolver) {
   // Curry through the inlining functions.
   return [
     inlineTemplate,
-    inlineStyle,
-    removeModuleId
+    inlineStyle
   ].reduce((content, fn) => fn(content, urlResolver), content);
 }
 
@@ -108,16 +107,6 @@ function inlineStyle(content, urlResolver) {
         .join(',\n')
       + ']';
   });
-}
-
-
-/**
- * Remove every mention of `moduleId: module.id`.
- * @param content {string} The source file's content.
- * @returns {string} The content with all moduleId: mentions removed.
- */
-function removeModuleId(content) {
-  return content.replace(/\s*moduleId:\s*module\.id\s*,?\s*/gm, '');
 }
 
 module.exports = inlineResources;

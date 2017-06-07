@@ -41,7 +41,12 @@
       },
       'quickstart-lib': {
         main: 'index.js',
-        defaultExtension: 'js'
+        defaultExtension: 'js',
+        meta: {
+          './*.js': {
+            loader: 'systemjs-angular-loader.js'
+          }
+        }
       }
     }
   });
