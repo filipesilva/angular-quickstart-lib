@@ -274,6 +274,10 @@ You'll also need to rename the folder your project is in.
 After you have changed the package name, you can publish it to NPM (read 
 [this link](https://docs.npmjs.com/getting-started/publishing-npm-packages) for details).
 
+Instead of following the `Updating the package` on that previous doc, here we use
+[standard-version](https://github.com/conventional-changelog/standard-version).
+Read their docs to see how to use it.
+
 First you'll need to create a NPM account and login on your local machine.
 Then you can publish your package by running `npm publish dist/`.  
 Since your package is built on the `dist/` folder this is the one you should publish.
