@@ -67,7 +67,7 @@
     "standard-version": "^4.0.0",
     "systemjs": "^0.19.40",
     "tslint": "^4.4.2",
-    "typescript": "^2.2.1",
+    "typescript": "~2.3.0",
     "zone.js": "^0.8.4"
   }
 }
