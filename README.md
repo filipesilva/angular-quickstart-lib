@@ -58,7 +58,7 @@ Then ...
 Perform the _clone-to-launch_ steps with these terminal commands.
 
 ```
-git clone https://github.com/angular/quickstart-lib.git quickstart-lib
+git clone https://github.com/filipesilva/angular-quickstart-lib.git
 cd angular-quickstart-lib
 npm install
 npm start
