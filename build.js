@@ -8,9 +8,10 @@ const ngc = require('@angular/compiler-cli/src/main').main;
 const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
 const sourcemaps = require('rollup-plugin-sourcemaps');
+const nodeResolve = require('rollup-plugin-node-resolve');
+const commonjs = require('rollup-plugin-commonjs');
 
 const inlineResources = require('./inline-resources');
-
 
 const libName = require('./package.json').name;
 const rootFolder = path.join(__dirname);
@@ -66,7 +67,11 @@ return Promise.resolve()
         '@angular/core'
       ],
       plugins: [
-        sourcemaps()
+        commonjs({
+          include: ['node_modules/rxjs/**']
+        }),
+        sourcemaps(),
+        nodeResolve({ jsnext: true, module: true })
       ]
     };
 
