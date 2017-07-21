@@ -251,7 +251,7 @@ Then install it from your other repo using a relative path to the dist folder:
 Every package on NPM has a unique name, and so should yours. 
 If you haven't already, now is the time to change the name of your library.
 
-Use your editor to search the project for all instances of `angular-quickstart-lib` and change it
+Use your editor to search the project for all instances of `quickstart-lib` and change it
 to your intended name (also in `dash-case` format).
 The library name is mentioned on at least these files: 
 
@@ -263,8 +263,8 @@ The library name is mentioned on at least these files:
 - `src/demo/app/app.module.ts`
 - `src/demo/systemjs.config.js`
 - `src/demo/tsconfig.json`
-- `src/lib/tsconfig.json`
 - `src/lib/tsconfig.es5.json`
+- `src/lib/tsconfig.lib.json`
 - `bs-config.json`
 - `package.json`
 - `README.md`
